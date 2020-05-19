@@ -1,15 +1,15 @@
 use core::ptr::{read_volatile, write_volatile};
 
-const CSR_ADDR: usize = 0xE000_E010;
-const RVR_ADDR: usize = 0xE000_E014;
-const CVR_ADDR: usize = 0xE000_E018;
-const CALIB_ADDR: usize = 0xE000_E01C;
+const SYST_CSR: usize = 0xe000_e010;
+const SYST_RVR: usize = 0xe000_e014;
+const SYST_CVR: usize = 0xe000_e018;
+const SYST_CALIB: usize = 0xe000_e01c;
 
 pub fn init() {
     unsafe {
-        write_volatile(CVR_ADDR as *mut u32, 0);
-        let calib_val = read_volatile(CALIB_ADDR as *const u32) & 0x00FF_FFFF;
-        write_volatile(RVR_ADDR as *mut u32, calib_val * 100);
-        write_volatile(CSR_ADDR as *mut u32, 0x3);
+        write_volatile(SYST_CVR as *mut u32, 0);
+        let tenms = read_volatile(SYST_CALIB as *const u32) & 0x00ff_ffff;
+        write_volatile(SYST_RVR as *mut u32, tenms * 10);
+        write_volatile(SYST_CSR as *mut u32, 0b111);
     }
 }

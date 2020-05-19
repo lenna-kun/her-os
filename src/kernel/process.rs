@@ -12,7 +12,7 @@ struct RegistersSavedByHardware {
 
 pub struct Process {
     sp: u32,
-    regs: [u32; 7],
+    regs: [u32; 8],
 }
 
 impl Process {
@@ -30,7 +30,7 @@ impl Process {
 
         Process {
             sp: sp as u32,
-            regs: [0; 7],
+            regs: [0; 8],
         }
     }
 
@@ -39,9 +39,9 @@ impl Process {
             llvm_asm!(
                 "
                 msr psp, r0
-                ldmia r1, {r4-r6, r8-r11}
+                ldmia r1, {r4-r11}
                 svc 0
-                stmia r1, {r4-r6, r8-r11}
+                stmia r1, {r4-r11}
                 mrs r0, psp
                 "
                 :"={r0}"(self.sp)

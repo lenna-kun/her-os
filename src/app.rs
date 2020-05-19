@@ -1,28 +1,55 @@
-use cortex_m_semihosting::hprintln;
+use super::peripherals;
 
 pub fn app1() -> ! {
-    let mut i = 0;
+    let pe8 = peripherals::gpio::PEx::new(8);
+    pe8.mode_push_pull_output();
+
+    let mut on = true;
     loop {
-        for _ in 0..10000 {}
-        hprintln!("app1: {}", i).unwrap();
-        i += 1;
+        if on {
+            pe8.set_high();
+        } else {
+            pe8.set_low();
+        }
+        for _ in 0..3000 {
+            unsafe { llvm_asm!("nop"::::"volatile"); }
+        }
+        on = !on;
     }
 }
 
 pub fn app2() -> ! {
-    let mut i = 0;
+    let pe9 = peripherals::gpio::PEx::new(9);
+    pe9.mode_push_pull_output();
+
+    let mut on = true;
     loop {
-        for _ in 0..10000 {}
-        hprintln!("app2: {}", i).unwrap();
-        i += 1;
+        if on {
+            pe9.set_high();
+        } else {
+            pe9.set_low();
+        }
+        for _ in 0..3000 {
+            unsafe { llvm_asm!("nop"::::"volatile"); }
+        }
+        on = !on;
     }
 }
 
 pub fn app3() -> ! {
-    let mut i = 0;
+    let pe10 = peripherals::gpio::PEx::new(10);
+    pe10.mode_push_pull_output();
+
+    let mut on = true;
     loop {
-        for _ in 0..10000 {}
-        hprintln!("app3: {}", i).unwrap();
-        i += 1;
+        if on {
+            pe10.set_high();
+        } else {
+            pe10.set_low();
+        }
+        for _ in 0..3000 {
+            unsafe { llvm_asm!("nop"::::"volatile"); }
+        }
+        on = !on;
     }
 }

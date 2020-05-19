@@ -6,6 +6,7 @@ use core::panic::PanicInfo;
 
 mod app;
 mod kernel;
+mod peripherals;
 mod sections;
 mod systick;
 mod exceptions;
@@ -28,6 +29,8 @@ pub unsafe fn reset_handler() -> ! {
     sections::init();
 
     systick::init();
+
+    peripherals::gpio::init();
 
     #[link_section = ".app_stack"]
     static mut APP_STACK1: [u8; 1024] = [0; 1024];
