@@ -8,7 +8,6 @@ mod app;
 mod kernel;
 mod peripherals;
 mod sections;
-mod systick;
 mod exceptions;
 
 use kernel::*;
@@ -28,7 +27,7 @@ pub unsafe fn reset_handler() -> ! {
     
     sections::init();
 
-    systick::init();
+    peripherals::systick::set_timer_us(20000);
 
     peripherals::gpio::init();
 

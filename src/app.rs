@@ -1,5 +1,10 @@
 use super::peripherals;
 
+#[inline]
+fn wait_a_bit() {
+    for _ in 0..2000 { unsafe { llvm_asm!("nop"::::"volatile"); } }
+}
+
 pub fn app1() -> ! {
     let pe8 = peripherals::gpio::PEx::new(8);
     pe8.mode_push_pull_output();
@@ -11,9 +16,7 @@ pub fn app1() -> ! {
         } else {
             pe8.set_low();
         }
-        for _ in 0..3000 {
-            unsafe { llvm_asm!("nop"::::"volatile"); }
-        }
+        wait_a_bit();
         on = !on;
     }
 }
@@ -29,9 +32,7 @@ pub fn app2() -> ! {
         } else {
             pe9.set_low();
         }
-        for _ in 0..3000 {
-            unsafe { llvm_asm!("nop"::::"volatile"); }
-        }
+        wait_a_bit();
         on = !on;
     }
 }
@@ -47,9 +48,7 @@ pub fn app3() -> ! {
         } else {
             pe10.set_low();
         }
-        for _ in 0..3000 {
-            unsafe { llvm_asm!("nop"::::"volatile"); }
-        }
+        wait_a_bit();
         on = !on;
     }
 }
