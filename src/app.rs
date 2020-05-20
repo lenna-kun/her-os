@@ -5,6 +5,15 @@ fn wait_a_bit() {
     for _ in 0..2000 { unsafe { llvm_asm!("nop"::::"volatile"); } }
 }
 
+#[link_section = ".app_stack"]
+pub static mut APP_STACK1: [u8; 1024] = [0; 1024];
+#[link_section = ".app_stack"]
+pub static mut APP_STACK2: [u8; 1024] = [0; 1024];
+#[link_section = ".app_stack"]
+pub static mut APP_STACK3: [u8; 1024] = [0; 1024];
+#[link_section = ".app_stack"]
+pub static mut APP_STACK4: [u8; 1024] = [0; 1024];
+
 pub fn app1() -> ! {
     let pe8 = peripherals::gpio::PEx::new(8);
     pe8.mode_push_pull_output();

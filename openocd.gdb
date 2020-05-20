@@ -23,7 +23,7 @@ break HardFault
 # end
 
 # *try* to stop at the user entry point (it might be gone due to inlining)
-break reset_handler
+break main
 
 monitor arm semihosting enable
 

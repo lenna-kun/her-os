@@ -1,11 +1,15 @@
 use cortex_m_semihosting::hprintln;
 
+use crate::main;
+use super::sections;
+
 pub union Vector {
     reserved: u32,
     handler: unsafe extern "C" fn(),
 }
 
 extern "C" {
+    // fn Reset();
     fn NMI();
     // fn HardFault();
     fn MemManage();
@@ -16,16 +20,15 @@ extern "C" {
     // fn SysTick();
 }
 
-#[link_section = ".vector_table.exceptions"]
+#[link_section = ".vector_table"]
 #[no_mangle]
-pub static EXCEPTIONS: [Vector; 14] = [
+pub static VECTOR_TABLE: [Vector; 15] = [
+    Vector { handler: Reset },
     Vector { handler: NMI },
     Vector { handler: HardFault },
     Vector { handler: MemManage },
     Vector { handler: BusFault },
-    Vector {
-        handler: UsageFault,
-    },
+    Vector { handler: UsageFault },
     Vector { reserved: 0 },
     Vector { reserved: 0 },
     Vector { reserved: 0 },
@@ -36,6 +39,13 @@ pub static EXCEPTIONS: [Vector; 14] = [
     Vector { handler: PendSV },
     Vector { handler: SysTick },
 ];
+
+#[no_mangle]
+pub unsafe extern "C" fn Reset() {
+    sections::init();
+
+    main()
+}
 
 #[no_mangle]
 pub extern "C" fn DefaultExceptionHandler() {

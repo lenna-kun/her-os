@@ -8,21 +8,15 @@ MEMORY
 }
 
 /* The entry point is the reset handler */
-ENTRY(reset_handler);
-
-EXTERN(RESET_VECTOR);
+ENTRY(Reset);
 
 SECTIONS
 {
   .vector_table ORIGIN(FLASH) :
   {
-    /* First entry: initial Stack Pointer value */
     LONG(ORIGIN(RAM) + LENGTH(RAM));
 
-    /* Second entry: reset vector */
-    KEEP(*(.vector_table.reset_vector));
-
-    KEEP(*(.vector_table.exceptions));
+    KEEP(*(.vector_table));
   } > FLASH
 
   .text :

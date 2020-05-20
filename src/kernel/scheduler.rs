@@ -1,4 +1,4 @@
-use crate::kernel::Process;
+use super::Process;
 
 const MAX_NUMBER_OF_PROCESSES: usize = 4;
 
