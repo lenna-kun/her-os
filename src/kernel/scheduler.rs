@@ -23,14 +23,15 @@ impl Kernel {
     }
 
     pub fn run_scheduling(&mut self) -> ! {
+        let len = self.processes.num();
+        let mut next = 0;
         loop {
-            for next in 0..self.processes.num() {
-                let next_process = self.processes[next].as_mut();
-                if next_process.is_none() {
-                    unimplemented!();
-                }
-                next_process.map(|p| { p.exec(); });
+            let next_process = self.processes[next].as_mut();
+            if next_process.is_none() {
+                unimplemented!();
             }
+            next_process.map(|p| { p.exec(); });
+            next = (next + 1) % len;
         }
     }
 }
