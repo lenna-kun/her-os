@@ -22,22 +22,6 @@ pub fn app1() -> ! {
 }
 
 pub fn app2() -> ! {
-    let pe9 = peripherals::gpio::PEx::new(9);
-    pe9.mode_push_pull_output();
-
-    let mut on = true;
-    loop {
-        if on {
-            pe9.set_high();
-        } else {
-            pe9.set_low();
-        }
-        wait_a_bit();
-        on = !on;
-    }
-}
-
-pub fn app3() -> ! {
     let pe10 = peripherals::gpio::PEx::new(10);
     pe10.mode_push_pull_output();
 
@@ -47,6 +31,38 @@ pub fn app3() -> ! {
             pe10.set_high();
         } else {
             pe10.set_low();
+        }
+        wait_a_bit();
+        on = !on;
+    }
+}
+
+pub fn app3() -> ! {
+    let pe12 = peripherals::gpio::PEx::new(12);
+    pe12.mode_push_pull_output();
+
+    let mut on = true;
+    loop {
+        if on {
+            pe12.set_high();
+        } else {
+            pe12.set_low();
+        }
+        wait_a_bit();
+        on = !on;
+    }
+}
+
+pub fn app4() -> ! {
+    let pe14 = peripherals::gpio::PEx::new(14);
+    pe14.mode_push_pull_output();
+
+    let mut on = true;
+    loop {
+        if on {
+            pe14.set_high();
+        } else {
+            pe14.set_low();
         }
         wait_a_bit();
         on = !on;
