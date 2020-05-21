@@ -16,7 +16,7 @@ SECTIONS
   {
     LONG(ORIGIN(RAM) + LENGTH(RAM));
 
-    KEEP(*(.vector_table));
+    KEEP(*(.vector_table.exceptions));
   } > FLASH
 
   .text :

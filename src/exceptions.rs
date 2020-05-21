@@ -20,7 +20,7 @@ extern "C" {
     // fn SysTick();
 }
 
-#[link_section = ".vector_table"]
+#[link_section = ".vector_table.exceptions"]
 #[no_mangle]
 pub static VECTOR_TABLE: [Vector; 15] = [
     Vector { handler: Reset },
