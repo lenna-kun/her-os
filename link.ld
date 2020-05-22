@@ -12,11 +12,11 @@ ENTRY(Reset);
 
 SECTIONS
 {
-  .vector_table ORIGIN(FLASH) :
+  .vectors ORIGIN(FLASH) :
   {
     LONG(ORIGIN(RAM) + LENGTH(RAM));
 
-    KEEP(*(.vector_table.exceptions));
+    KEEP(*(.vectors.exceptions));
   } > FLASH
 
   .text :
