@@ -44,7 +44,8 @@ pub static VECTOR_TABLE: [Vector; 15] = [
 pub unsafe extern "C" fn Reset() {
     sections::init();
 
-    main()
+    let f: fn() -> ! = main;
+    f()
 }
 
 #[no_mangle]
