@@ -10,6 +10,8 @@ MEMORY
 /* The entry point is the reset handler */
 ENTRY(Reset);
 
+EXTERN(VECTOR_TABLE);
+
 SECTIONS
 {
   .vectors ORIGIN(FLASH) :
@@ -44,11 +46,6 @@ SECTIONS
   } > RAM
 
   _sidata = LOADADDR(.data);
-
-  .app_stack ALIGN(0x08):
-  {
-    *(.app_stack .app_stack.*);
-  } > RAM
 
   /DISCARD/ :
   {

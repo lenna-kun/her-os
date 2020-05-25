@@ -71,6 +71,7 @@ dependencies = [
 name = "heros"
 version = "0.1.0"
 dependencies = [
+ "aligned",
  "cortex-m-semihosting",
  "vcell",
 ]
