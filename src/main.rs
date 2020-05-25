@@ -24,10 +24,10 @@ pub fn main() -> ! {
     peripherals::gpio::init();
 
     unsafe {
-        let process1 = Process::new(&mut *app::APP_STACK1, app::app1);
-        let process2 = Process::new(&mut *app::APP_STACK2, app::app2);
-        let process3 = Process::new(&mut *app::APP_STACK3, app::app3);
-        let process4 = Process::new(&mut *app::APP_STACK4, app::app4);
+        let process1 = Process::new(&mut *app::PROCESS_STACK1, app::app1);
+        let process2 = Process::new(&mut *app::PROCESS_STACK2, app::app2);
+        let process3 = Process::new(&mut *app::PROCESS_STACK3, app::app3);
+        let process4 = Process::new(&mut *app::PROCESS_STACK4, app::app4);
 
         let mut kernel = Kernel::new();
 
