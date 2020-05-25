@@ -30,7 +30,7 @@ impl Kernel {
             if next_process.is_none() {
                 unimplemented!();
             }
-            next_process.map(|p| { p.exec(); });
+            next_process.map(|p| { p.switch_to(); });
             next = (next + 1) % len;
         }
     }

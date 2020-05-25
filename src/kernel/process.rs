@@ -34,7 +34,7 @@ impl Process {
         }
     }
 
-    pub fn exec(&mut self) {
+    pub fn switch_to(&mut self) {
         unsafe {
             llvm_asm!(
                 "
