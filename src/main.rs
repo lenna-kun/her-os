@@ -36,6 +36,6 @@ pub fn main() -> ! {
         kernel.load_process(process3).unwrap();
         kernel.load_process(process4).unwrap();
 
-        kernel.run_scheduling()
+        kernel.run_scheduler()
     }
 }

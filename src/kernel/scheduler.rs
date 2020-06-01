@@ -22,7 +22,7 @@ impl Kernel {
         Ok(())
     }
 
-    pub fn run_scheduling(&mut self) -> ! {
+    pub fn run_scheduler(&mut self) -> ! {
         let len = self.processes.num();
         let mut next = 0;
         loop {
